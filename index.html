@@ -100,6 +100,10 @@ input[type=text]{width:100%;padding:16px 18px;border:2px solid #f0b6ce;border-ra
    <div class="note">Tip: 8–10 photos best lagenge. Photos browser mein compress hokar share-link ke URL fragment mein pack hoti hain; server ko photo data nahi bheja jata.</div>
    <button class="btn" onclick="createShareLink()">🔗 Create Surprise Link</button>
    <div id="linkStatus" class="note" style="margin-top:10px"></div>
+   <div id="shareBox" style="display:none;margin-top:12px">
+    <textarea id="shareLink" readonly style="width:100%;min-height:90px;border-radius:12px;padding:10px;font-size:12px;box-sizing:border-box"></textarea>
+    <button class="btn" onclick="copyShareLink()" style="margin-top:8px">📋 Copy Link</button>
+   </div>
   </div>
   <div id="gallery" class="gallery"></div>
   <button class="btn" onclick="go(7)">One last thing… 🥹</button>
@@ -171,12 +175,13 @@ async function createShareLink(){
   for(const f of selectedPhotoFiles){imgs.push(await compressDataUrl(await fileToDataURL(f)))}
   const payload=btoa(unescape(encodeURIComponent(JSON.stringify({photos:imgs}))))
   const url=location.href.split('#')[0]+'#surprise='+payload;
-  await navigator.clipboard.writeText(url).catch(()=>{});
-  status.innerHTML='✅ Link ready! <b>Share/Copy</b> karo aur Unnati ko bhej do. (Link lamba ho sakta hai because photos link ke andar hain.)';
-  const box=document.createElement('textarea');box.value=url;box.style.position='fixed';box.style.opacity='0';document.body.appendChild(box);box.select();
-  if(!navigator.clipboard) document.execCommand('copy'); box.remove();
+  document.getElementById('shareLink').value=url;
+  document.getElementById('shareBox').style.display='block';
+  status.innerHTML='✅ Link ready! Neeche jo link dikh raha hai wahi Unnati ko bhejna hai ❤️';
+  try{await navigator.clipboard.writeText(url);status.innerHTML+=' <br>📋 Link automatically copy bhi ho gaya.';}catch(e){}
  }catch(e){status.textContent='Link nahi ban paya. Photos thodi kam ya chhoti karke try karo ❤️'}
 }
+async function copyShareLink(){const ta=document.getElementById('shareLink');try{await navigator.clipboard.writeText(ta.value);document.getElementById('linkStatus').innerHTML='✅ Link copied! Ab WhatsApp par paste karke bhej do ❤️';}catch(e){ta.focus();ta.select();document.execCommand('copy');document.getElementById('linkStatus').innerHTML='✅ Link copy ho gaya! Ab WhatsApp par paste karke bhej do ❤️';}}
 function loadSharedPhotos(){
  const m=location.hash.match(/^#surprise=(.+)$/); if(!m)return;
  try{const data=JSON.parse(decodeURIComponent(escape(atob(m[1]))));const g=document.getElementById('gallery');g.innerHTML='';(data.photos||[]).forEach(u=>{const img=document.createElement('img');img.src=u;img.onclick=()=>{document.getElementById('lbimg').src=u;document.getElementById('lightbox').style.display='flex'};g.appendChild(img)});go(6);document.getElementById('linkStatus').textContent='💗 Surprise photos loaded from the link!';}catch(e){}
