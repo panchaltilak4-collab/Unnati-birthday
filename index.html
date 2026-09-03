@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>For Unnati ❤️</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:Georgia,"Times New Roman",serif;background:linear-gradient(135deg,#fff1f7,#f5eaff);color:#54233d}
+body{overflow-x:hidden}.screen{min-height:100vh;display:none;align-items:center;justify-content:center;padding:28px 18px;position:relative}.screen.active{display:flex}
+.card{width:min(680px,100%);background:rgba(255,255,255,.9);border-radius:32px;padding:34px 24px;box-shadow:0 20px 70px rgba(120,40,90,.16);text-align:center;border:1px solid rgba(255,255,255,.8)}
+h1{font-size:clamp(34px,9vw,64px);margin:8px 0 18px;color:#d92f72}.big{font-size:clamp(42px,12vw,80px);line-height:1.05}.sub{font-size:20px;line-height:1.7}.btn{border:0;border-radius:999px;padding:15px 25px;margin:8px;font-size:18px;font-weight:700;cursor:pointer;background:#ed3976;color:white;box-shadow:0 10px 25px rgba(237,57,118,.25)}.btn.alt{background:#f4d5e3;color:#7b3455}.btn:active{transform:scale(.97)}
+input[type=text]{width:100%;padding:16px 18px;border:2px solid #f0b6ce;border-radius:18px;font-size:19px;outline:none;text-align:center}.hint{font-size:14px;opacity:.7}.error{min-height:28px;color:#c62458;font-weight:700;margin-top:10px}
+.shayri{font-size:21px;line-height:1.9;background:#fff6fa;border-radius:24px;padding:20px;margin:20px 0}.message{text-align:left;font-size:19px;line-height:1.8}.gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:18px}.gallery img{width:100%;height:210px;object-fit:cover;border-radius:18px;box-shadow:0 8px 20px rgba(80,20,50,.15);cursor:pointer}.gallery img:first-child{grid-column:span 2;height:290px}
+.filebox{margin:22px 0;padding:22px;border:2px dashed #e78db2;border-radius:22px;background:#fff8fb}.filebox input{width:100%;margin-top:12px}.note{font-size:14px;line-height:1.6;opacity:.72}
+.heart{position:fixed;bottom:-40px;animation:float 7s linear forwards;pointer-events:none;font-size:24px}@keyframes float{to{transform:translateY(-115vh) rotate(25deg);opacity:0}}
+#playerWrap{position:fixed;left:-10000px;top:-10000px;width:1px;height:1px;overflow:hidden}
+#music{position:fixed;right:14px;top:14px;z-index:20;border:0;border-radius:999px;background:#fff;color:#c72e67;padding:10px 14px;box-shadow:0 6px 20px #0002;font-weight:700;display:none}
+#lightbox{position:fixed;inset:0;background:#000d;display:none;align-items:center;justify-content:center;z-index:50;padding:20px}#lightbox img{max-width:95vw;max-height:90vh;border-radius:18px}
+.final{font-size:24px;line-height:1.7}.signature{font-size:20px;margin-top:25px;color:#a52d61}
+@media(max-width:500px){.card{padding:28px 17px}.gallery img{height:170px}.gallery img:first-child{height:235px}}
+</style>
+</head>
+<body>
+
+<div id="playerWrap"><div id="ytplayer"></div></div>
+<button id="music" onclick="toggleMusic()">🎵 Haareya <span id="musicState">ON</span></button>
+
+<section class="screen active" id="s1">
+ <div class="card">
+  <div style="font-size:60px">🎀</div>
+  <h1>Hey Unnati… 👀</h1>
+  <p class="sub">Ek chhota sa surprise hai tere liye.<br><b>Ready ho?</b> 🥹🫶🏻</p>
+  <button class="btn" onclick="startExperience();go(2)">YESSS ❤️</button>
+  <button class="btn alt" onclick="noReady()">No 🙈</button>
+  <div class="error" id="readyErr"></div>
+ </div>
+</section>
+
+<section class="screen" id="s2">
+ <div class="card">
+  <div style="font-size:55px">👀</div>
+  <h1>Ek important sawaal…</h1>
+  <p class="sub"><b>Are you 18 or not?</b> 😭😂</p>
+  <button class="btn" onclick="go(3)">YES 😇</button>
+  <button class="btn alt" onclick="no18()">NO 🥺</button>
+  <div class="error" id="ageErr"></div>
+ </div>
+</section>
+
+<section class="screen" id="s3">
+ <div class="card">
+  <div style="font-size:55px">📍</div>
+  <h1>Memory Test 🫶🏻</h1>
+  <p class="sub">Aapke aur aapke bande ki <b>first meet</b> kis city mein hui thi? 👀</p>
+  <input id="city" type="text" autocomplete="off" placeholder="City ka naam likho…">
+  <button class="btn" onclick="checkCity()">NEXT 💗</button>
+  <div class="error" id="cityErr"></div>
+ </div>
+</section>
+
+<section class="screen" id="s4">
+ <div class="card">
+  <div style="font-size:72px">🎂💗</div>
+  <h1 class="big">HAPPY<br>BIRTHDAY<br>UNNATI! 🥹🫶🏻</h1>
+  <p class="sub">Meri jaan, mera baccha… <b>this one is only for you.</b> ❤️</p>
+  <button class="btn" onclick="go(5)">Open your letter 💌</button>
+ </div>
+</section>
+
+<section class="screen" id="s5">
+ <div class="card">
+  <h1>For my favourite person 💗</h1>
+  <div class="shayri">
+   <i>तेरे होने से ही मेरी दुनिया में रौनक है,<br>
+   तेरी हँसी में ही मेरी सारी चाहत है,<br>
+   यूँ तो बहुत कुछ पाया है इस ज़िंदगी में,<br>
+   पर तुझ जैसा साथ नहीं है किस्मत में हर किसी के पास... 🥹🫶💗🫂</i>
+  </div>
+  <div class="message">
+   <b>Happy birthday meri jaan mera baccha..!😘🎂🥹🫶💗</b><br><br>
+   It’s 12am, and I couldn’t wait even a second longer to wish the most special nd beautiful person in my life🥹🫶💗
+   <br><br>
+   Now, meri apni kahani likhunga english me nhi hindi me hi shi but with start a beautiful shayri for you baby….!🫶💗
+   <br><br>
+   Bas itna kehna hai ki tu meri life ka woh beautiful sa part hai jiske bina sab kuch thoda sa incomplete lagta hai. Teri smile, teri cute si nautanki, tera gussa — sab kuch mere liye special hai. 🥹💗
+   <br><br>
+   I lovee you baby miss you so much meri jaann ummmmaaaaahhhhhhhhhh🥹😭🧿🫶💗💋😘
+  </div>
+  <button class="btn" onclick="go(6)">Our little memories 📸</button>
+ </div>
+</section>
+
+<section class="screen" id="s6">
+ <div class="card">
+  <h1>Our Memories 📸</h1>
+  <p class="sub">Ab apni <b>8–10 favourite photos</b> select karo. Phir <b>Create Surprise Link</b> dabao — photos link ke andar pack ho jayengi, kisi server par upload nahi hongi.</p>
+  <div class="filebox">
+   <b>📷 Select Photos</b><br>
+   <input id="photos" type="file" accept="image/*" multiple onchange="previewPhotos(event)">
+   <div class="note">Tip: 8–10 photos best lagenge. Photos browser mein compress hokar share-link ke URL fragment mein pack hoti hain; server ko photo data nahi bheja jata.</div>
+   <button class="btn" onclick="createShareLink()">🔗 Create Surprise Link</button>
+   <div id="linkStatus" class="note" style="margin-top:10px"></div>
+  </div>
+  <div id="gallery" class="gallery"></div>
+  <button class="btn" onclick="go(7)">One last thing… 🥹</button>
+ </div>
+</section>
+
+<section class="screen" id="s7">
+ <div class="card">
+  <div style="font-size:65px">🫂🧿💗</div>
+  <h1>Bas ek baat yaad rakhna…</h1>
+  <p class="final">
+   Chahe life kitni bhi busy ho jaye,<br>
+   chahe kitne bhi ups & downs aaye,<br>
+   <b>main hamesha tere saath khada rahunga.</b> 🥹🫶🏻
+   <br><br>
+   Tu meri favourite person hai,<br>
+   meri favourite smile hai,<br>
+   aur meri favourite feeling bhi. ❤️
+  </p>
+  <div class="shayri">
+   <i>कुछ इस तरह तेरी पलकों पे ठहर जाऊँ,<br>
+   तू ख्वाब देखे... और मैं पूरा हो जाऊँ।</i><br>🥹🧿💗🤞🏻
+  </div>
+  <div class="signature">— Tera Betu 🫂💗</div>
+  <h1 style="margin-top:30px">Happy Birthday, Meri Jaan! 🎂❤️</h1>
+  <p class="sub">I love youuuuu so much. 🥹💗🫶🏻</p>
+ </div>
+</section>
+
+<div id="lightbox" onclick="this.style.display='none'"><img id="lbimg"></div>
+
+<script>
+let player=null, musicOn=false;
+function go(n){document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));document.getElementById('s'+n).classList.add('active');window.scrollTo(0,0);hearts(5)}
+function noReady(){document.getElementById('readyErr').textContent="Pakka? 😭 Itna cute surprise hai… ab YES dabao na! 🥺💗"}
+function no18(){document.getElementById('ageErr').textContent="Bhagwan dekh raha hai 😭😂 Sahi answer do madam ji!";hearts(8)}
+function checkCity(){
+ const v=document.getElementById('city').value.trim().toLowerCase().replace(/[^a-z]/g,'');
+ if(v==='ujjain'){document.getElementById('cityErr').textContent='';go(4)}
+ else{document.getElementById('cityErr').textContent='Areee galat 😭😂 Apni first meet wali city yaad karo! Hint: Ujjain 🫶🏻';}
+}
+function startExperience(){
+ document.getElementById('music').style.display='block';
+ try{
+  if(!player){
+   player=new YT.Player('ytplayer',{height:'1',width:'1',videoId:'TyMUY2CDrjc',
+    playerVars:{autoplay:1,loop:1,playlist:'TyMUY2CDrjc',controls:0,playsinline:1},
+    events:{onReady:function(e){e.target.setVolume(65);e.target.playVideo();musicOn=true;document.getElementById('musicState').textContent='ON';}}
+   });
+  } else player.playVideo();
+ }catch(e){}
+}
+function toggleMusic(){if(!player)return;if(musicOn){player.pauseVideo();musicOn=false;document.getElementById('musicState').textContent='OFF'}else{player.playVideo();musicOn=true;document.getElementById('musicState').textContent='ON'}}
+let selectedPhotoFiles=[];
+function previewPhotos(ev){
+ selectedPhotoFiles=[...ev.target.files].slice(0,10);
+ const g=document.getElementById('gallery');g.innerHTML='';
+ document.getElementById('linkStatus').textContent='';
+ selectedPhotoFiles.forEach(f=>{const u=URL.createObjectURL(f),img=document.createElement('img');img.src=u;img.onclick=()=>{document.getElementById('lbimg').src=u;document.getElementById('lightbox').style.display='flex'};g.appendChild(img)});
+}
+function fileToDataURL(file){return new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=reject;r.readAsDataURL(file)})}
+function compressDataUrl(dataUrl){return new Promise((resolve,reject)=>{const im=new Image();im.onload=()=>{const max=900,scale=Math.min(1,max/Math.max(im.width,im.height));const c=document.createElement('canvas');c.width=Math.max(1,Math.round(im.width*scale));c.height=Math.max(1,Math.round(im.height*scale));c.getContext('2d').drawImage(im,0,0,c.width,c.height);resolve(c.toDataURL('image/jpeg',0.62))};im.onerror=reject;im.src=dataUrl})}
+async function createShareLink(){
+ const status=document.getElementById('linkStatus');
+ if(selectedPhotoFiles.length<1){status.textContent='Pehle kam se kam 1 photo select karo ❤️';return}
+ status.textContent='Photos prepare ho rahi hain… thoda sa wait 🥹';
+ try{
+  const imgs=[];
+  for(const f of selectedPhotoFiles){imgs.push(await compressDataUrl(await fileToDataURL(f)))}
+  const payload=btoa(unescape(encodeURIComponent(JSON.stringify({photos:imgs}))))
+  const url=location.href.split('#')[0]+'#surprise='+payload;
+  await navigator.clipboard.writeText(url).catch(()=>{});
+  status.innerHTML='✅ Link ready! <b>Share/Copy</b> karo aur Unnati ko bhej do. (Link lamba ho sakta hai because photos link ke andar hain.)';
+  const box=document.createElement('textarea');box.value=url;box.style.position='fixed';box.style.opacity='0';document.body.appendChild(box);box.select();
+  if(!navigator.clipboard) document.execCommand('copy'); box.remove();
+ }catch(e){status.textContent='Link nahi ban paya. Photos thodi kam ya chhoti karke try karo ❤️'}
+}
+function loadSharedPhotos(){
+ const m=location.hash.match(/^#surprise=(.+)$/); if(!m)return;
+ try{const data=JSON.parse(decodeURIComponent(escape(atob(m[1]))));const g=document.getElementById('gallery');g.innerHTML='';(data.photos||[]).forEach(u=>{const img=document.createElement('img');img.src=u;img.onclick=()=>{document.getElementById('lbimg').src=u;document.getElementById('lightbox').style.display='flex'};g.appendChild(img)});go(6);document.getElementById('linkStatus').textContent='💗 Surprise photos loaded from the link!';}catch(e){}
+}
+window.addEventListener('load',loadSharedPhotos);
+function hearts(count=4){for(let i=0;i<count;i++){let h=document.createElement('div');h.className='heart';h.textContent=['💗','💖','💕','🫶🏻','✨'][Math.floor(Math.random()*5)];h.style.left=Math.random()*95+'vw';h.style.animationDuration=(5+Math.random()*4)+'s';document.body.appendChild(h);setTimeout(()=>h.remove(),9000)}}
+setInterval(()=>{if(document.querySelector('.screen.active')?.id!=='s1')hearts(1)},2600);
+</script>
+<script src="https://www.youtube.com/iframe_api"></script>
+</body>
+</html>
